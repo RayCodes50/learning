@@ -1,0 +1,38 @@
+*{
+    margin: 0px;
+    border: 1px solid red;
+}
+html {
+    box-sizing: border-box;
+}
+
+.recipe {
+    margin: 0 10px;
+    text-align: center;
+}
+.title {
+    font-size: 50px;
+    text-align: center;
+}
+.top {}
+
+.foodImg {
+    height: 300px;
+    width: auto;
+    display: inline;
+}
+.description {
+    display: inline-block;
+    width: 400px;
+}
+.bottom {
+    margin: 0 auto;
+}
+.ingredients {
+    display: inline-block;
+    width: 300px;
+}
+.steps {
+    display: inline-block;
+    width: 400px;
+}
