@@ -1,0 +1,11 @@
+html {
+    box-sizing: border-box;
+}
+.title {
+    text-align: center;
+    font-size: 50px;
+}
+
+li {
+    font-size: 32px;
+}
