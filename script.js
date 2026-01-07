@@ -1,17 +1,9 @@
-function favoriteAnimal(animal) {
-  return animal + ` is my favorite animal!`;
+try {
+  // let undefinedVariable = 15;
+  let a = undefinedVariable;
+} catch (e) {
+  console.log(e instanceof ReferenceError); // true
+  console.log(e.message); // "undefinedVariable is not defined"
+  console.log(e.name); // "ReferenceError"
+  console.log(e.stack); // Stack of the error
 }
-
-console.log(favoriteAnimal(`Kura`));
-
-const message = favoriteAnimal(`Goat`);
-console.log(message);
-
-function showMessage(from, text = "Kupa") {
-  from = "*" + from + "*";
-  alert(from + ": " + text);
-}
-let from = "Ann";
-showMessage(from, "Hello!");
-
-alert(from);
