@@ -1,23 +1,24 @@
-function sumAll(a, b) {
-  let sum = 0;
-  if (typeof a !== "number" || typeof b !== "number") {
-    return `ERROR`;
-  }
-  if (a < 0 || b < 0) {
-    return `ERROR`;
-  }
-  if (!Number.isInteger(a) || !Number.isInteger(b)) {
-    return `ERROR2`;
-  }
+const list = document.querySelector("ul");
+const input = document.querySelector("input");
+const btn = document.querySelector("button");
 
-  if (b < a) {
-    [a, b] = [b, a];
-  }
+btn.addEventListener("click", btnClicked);
 
-  for (let i = a; i <= b; i++) {
-    sum += i;
-  }
-  return sum;
+function btnClicked(event) {
+  event.preventDefault();
+  const inputVal = input.value;
+  input.value = "";
+  console.log(input.value);
+  const newLi = document.createElement("li");
+  const newSpan = document.createElement("span");
+  const newBtn = document.createElement("button");
+  newLi.appendChild(newSpan);
+  newLi.appendChild(newBtn);
+  newSpan.textContent = inputVal;
+  newBtn.textContent = "Delete";
+  list.appendChild(newLi);
+  newBtn.addEventListener("click", function () {
+    newLi.remove();
+  });
+  input.focus();
 }
-
-console.log(sumAll(2000021, 4));
