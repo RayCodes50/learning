@@ -3,6 +3,10 @@ const score = document.querySelector(".score");
 
 btns.forEach((button) => {
   button.addEventListener("click", () => {
+    if (gamesPlayed == 5) {
+      console.log(`Enough playing games!`);
+      return;
+    }
     const humanSelection = button.value;
     playRound(humanSelection);
   });
@@ -48,6 +52,11 @@ function playRound(humanSelection) {
     score.textContent = `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`;
   }
   console.log(`Games played ${gamesPlayed}`);
-  // if (gamesPlayed == 5) {
-  // }
+  if (gamesPlayed == 5) {
+    if (humanScore > computerScore) {
+      score.textContent = `AND THE WINNER IS THE HUMAN`;
+    } else {
+      score.textContent = `AND THE WINNER IS THE COMPUTER`;
+    }
+  }
 }
