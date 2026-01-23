@@ -1,10 +1,16 @@
 const btns = document.querySelectorAll("button");
+const score = document.querySelector(".score");
+
 btns.forEach((button) => {
   button.addEventListener("click", () => {
-    console.log(button.value);
-    playRound();
+    const humanSelection = button.value;
+    playRound(humanSelection);
   });
 });
+let humanScore = 0;
+let computerScore = 0;
+let tieScore = 0;
+let gamesPlayed = 0;
 
 function getComputerChoice() {
   let choice = "";
@@ -20,58 +26,28 @@ function getComputerChoice() {
   return choice;
 }
 
-function getHumanChoice() {
-  let human = prompt(`Pick a hand`);
+function playRound(humanSelection) {
+  let computerSelection = getComputerChoice();
 
-  return human;
-}
+  if (computerSelection == humanSelection) {
+    tieScore++;
+    gamesPlayed++;
+    score.textContent = `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`;
+  } else if (
+    (humanSelection == "paper" && computerSelection == "rock") ||
+    (humanSelection == "rock" && computerSelection == "scissors") ||
+    (humanSelection == "scissors" && computerSelection == "paper")
+  ) {
+    humanScore++;
+    gamesPlayed++;
 
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-  let tieScore = 0;
-
-  console.log(`Initiate Game`);
-
-  function playRound() {
-    let computerSelection = getComputerChoice();
-    let humanSelection = getHumanChoice().toLowerCase();
-    console.log(computerSelection);
-    console.log(humanSelection);
-
-    if (computerSelection == humanSelection) {
-      console.log(
-        `It's a tie you picked ${humanSelection} computer ${computerSelection}`,
-      );
-      tieScore++;
-      console.log(
-        `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`,
-      );
-    } else if (
-      (humanSelection == "paper" && computerSelection == "rock") ||
-      (humanSelection == "rock" && computerSelection == "scissors") ||
-      (humanSelection == "scissors" && computerSelection == "paper")
-    ) {
-      console.log(
-        `Human WINS human ${humanSelection} computer ${computerSelection}`,
-      );
-      humanScore++;
-      console.log(
-        `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`,
-      );
-    } else {
-      console.log(
-        `Computer WINS human ${humanSelection} computer ${computerSelection}`,
-      );
-      computerScore++;
-      console.log(
-        `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`,
-      );
-    }
+    score.textContent = `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`;
+  } else {
+    computerScore++;
+    gamesPlayed++;
+    score.textContent = `The score is Human: ${humanScore} Computer: ${computerScore} Ties: ${tieScore}`;
   }
-  // for (let i = 0; i < 2; i++) {
-  //   console.log(`Round ${i + 1}`);
-  //   playRound();
+  console.log(`Games played ${gamesPlayed}`);
+  // if (gamesPlayed == 5) {
   // }
 }
-playGame();
