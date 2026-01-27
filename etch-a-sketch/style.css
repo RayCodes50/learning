@@ -59,10 +59,11 @@ menu > * {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+  --tiles: 5;
 }
 .box {
-  width: calc(790px / 5);
-  height: calc(790px / 5);
-  border: 1px solid black;
-  flex-grow: 1;
+  width: calc(100% / var(--tiles));
+  height: calc(100% / var(--tiles));
+  background-color: yellow;
+  flex: 0 0 auto;
 }
