@@ -1,9 +1,32 @@
 const pad = document.querySelector(".sketch");
 const inputGrid = document.querySelector(".gridSize");
 const box = document.querySelector(".box");
-
+const blackBtn = document.querySelector(".blackBtn");
+const whiteBtn = document.querySelector(".whiteBtn");
+let tiles;
 // Default grid at page load
 let num = 5;
+
+// eventListeners
+
+// black BTN
+blackBtn.addEventListener("click", (e) => {
+  tiles.forEach((tile) => {
+    tile.addEventListener("mouseenter", (e) => {
+      console.log(`You just hovered over me`);
+      tile.style.backgroundColor = "rgba(0, 0, 0, 1)";
+    });
+  });
+});
+// white BTN
+whiteBtn.addEventListener("click", (e) => {
+  tiles.forEach((tile) => {
+    tile.addEventListener("mouseenter", (e) => {
+      console.log(`You just hovered over me`);
+      tile.style.backgroundColor = "rgba(255, 255, 255, 1)";
+    });
+  });
+});
 
 inputGrid.addEventListener("change", (e) => {
   // change users input to number
@@ -36,13 +59,6 @@ function createGrid(num) {
   // starting grid
 
   pad.replaceChildren(fragment);
-  const tiles = document.querySelectorAll(".box");
-
-  tiles.forEach((tile) => {
-    console.log(`initiated`);
-    tile.addEventListener("mouseenter", (e) => {
-      console.log(`You just hovered over me`);
-    });
-  });
+  tiles = document.querySelectorAll(".box");
 }
 createGrid(num);
