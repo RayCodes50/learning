@@ -1,24 +1,13 @@
-const list = document.querySelector("ul");
-const input = document.querySelector("input");
-const btn = document.querySelector("button");
+let users = [
+  { id: "john", name: "John Smith", age: 20 },
+  { id: "ann", name: "Ann Smith", age: 24 },
+  { id: "pete", name: "Pete Peterson", age: 31 },
+];
 
-btn.addEventListener("click", btnClicked);
-
-function btnClicked(event) {
-  event.preventDefault();
-  const inputVal = input.value;
-  input.value = "";
-  console.log(input.value);
-  const newLi = document.createElement("li");
-  const newSpan = document.createElement("span");
-  const newBtn = document.createElement("button");
-  newLi.appendChild(newSpan);
-  newLi.appendChild(newBtn);
-  newSpan.textContent = inputVal;
-  newBtn.textContent = "Delete";
-  list.appendChild(newLi);
-  newBtn.addEventListener("click", function () {
-    newLi.remove();
-  });
-  input.focus();
+let usersById = groupById(users);
+function groupById(arr) {
+  return arr.reduce((obj, value) => {
+    obj[value.id] = value;
+    return obj;
+  }, {});
 }
