@@ -14,6 +14,19 @@ equal.addEventListener("click", function () {
 btnsOperators.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     operator = e.target.innerText;
+    // check if operator was pressed after second number if so
+    if (secondNumber != 0) {
+      //evaluate the qeuastion
+      let output = operate(firstNumber, operator, secondNumber);
+      // update the display
+      displayCurrent.innerText = `${output} ${operator}`;
+      // reset numbers to reflect the current user intention e.g
+      // pressing 1 + 1 again + so 2 + wait for second number
+      firstNumber = output;
+      operator = operator;
+      secondNumber = 0;
+      return;
+    }
     displayCurrent.innerText += ` ${operator}`;
     console.log(operator);
   });
