@@ -7,15 +7,14 @@ let secondNumber = 0;
 let operator = "";
 
 equal.addEventListener("click", function () {
-  console.log(firstNumber);
-  console.log(operator);
-  console.log(secondNumber);
-  console.log(`Equal initiated`);
-  console.log(operate(firstNumber, operator, secondNumber));
+  let output = operate(firstNumber, operator, secondNumber);
+  displayCurrent.innerText += ` = ${output}`;
 });
+
 btnsOperators.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     operator = e.target.innerText;
+    displayCurrent.innerText += ` x`;
     console.log(operator);
   });
 });
@@ -23,11 +22,12 @@ btnsOperators.forEach((btn) => {
 btnsNumbers.forEach((number) => {
   number.addEventListener("click", (e) => {
     let number = Number(e.target.innerText);
-    displayCurrent.innerText = `${number}`;
     if (firstNumber == 0) {
       firstNumber = number;
+      displayCurrent.innerText = `${number}`;
     } else {
       secondNumber = number;
+      displayCurrent.innerText += ` ${number}`;
     }
   });
 });
