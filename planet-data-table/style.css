@@ -1,0 +1,102 @@
+/* CSS reset */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  line-height: 1;
+}
+
+ul,
+ol,
+a {
+  list-style: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+html {
+  font-family: sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200 200 200);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+td,
+th {
+  border: 1px solid rgb(190 190 190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235 235 235);
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(250 250 250);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245 245 245);
+}
+
+caption {
+  padding: 10px;
+}
+
+.column-border {
+  border: 2px solid black;
+}
+
+/* My styling */
+
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+table {
+  vertical-align: center;
+  text-align: center;
+}
