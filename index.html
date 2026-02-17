@@ -3,35 +3,66 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Table template</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>Favorite fruit start</title>
+    <style>
+      input:invalid {
+        border: 2px dashed red;
+      }
+
+      input:invalid:required {
+        background-image: linear-gradient(to right, pink, lightgreen);
+      }
+
+      input:valid {
+        border: 2px solid black;
+      }
+    </style>
   </head>
+
   <body>
-    <h1>Table template</h1>
-    <table>
-      <tr>
-        <th colspan="2">Animals</th>
-      </tr>
-      <tr>
-        <th colspan="2">Hippopotamus</th>
-      </tr>
-      <tr>
-        <th rowspan="2">Horse</th>
-        <td>Mare</td>
-      </tr>
-      <tr>
-        <td>Stallion</td>
-      </tr>
-      <tr>
-        <th colspan="2">Crocodile</th>
-      </tr>
-      <tr>
-        <th rowspan="2">Chicken</th>
-        <td>Hen</td>
-      </tr>
-      <tr>
-        <td>Rooster</td>
-      </tr>
-    </table>
+    <form>
+      <p>Please complete all required (*) fields.</p>
+      <fieldset>
+        <legend>Do you have a driver's license? *</legend>
+        <input type="radio" required name="driver" id="r1" value="yes" />
+        <label for="r1">Yes</label>
+        <input type="radio" required name="driver" id="r2" value="no" />
+        <label for="r2">No</label>
+      </fieldset>
+      <p>
+        <label for="n1">How old are you?</label>
+        <input type="number" min="12" max="120" step="1" id="n1" name="age" />
+      </p>
+      <p>
+        <label for="t1">What's your favorite fruit? *</label>
+        <input
+          type="text"
+          id="t1"
+          name="fruit"
+          list="l1"
+          required
+          pattern="[Bb]anana|[Cc]herry|[Aa]pple|[Ss]trawberry|[Ll]emon|[Oo]range"
+        />
+        <datalist id="l1">
+          <option>Banana</option>
+          <option>Cherry</option>
+          <option>Apple</option>
+          <option>Strawberry</option>
+          <option>Lemon</option>
+          <option>Orange</option>
+        </datalist>
+      </p>
+      <p>
+        <label for="t2">What's your email address?</label>
+        <input type="email" id="t2" name="email" />
+      </p>
+      <p>
+        <label for="t3">Leave a short message</label>
+        <textarea id="t3" name="msg" maxlength="140" rows="5"></textarea>
+      </p>
+      <p>
+        <button>Submit</button>
+      </p>
+    </form>
   </body>
 </html>
