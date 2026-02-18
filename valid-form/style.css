@@ -28,6 +28,9 @@ nav ul li a {
   text-decoration: none;
   color: inherit;
 }
+input {
+  outline: none;
+}
 
 /* Headings & paragraphs */
 h1,
@@ -92,10 +95,11 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
-  align-items: center;
 }
 .wrap {
   width: 100%;
+  height: fit-content;
+  margin-top: 10rem;
   color: white;
   font-size: 7rem;
   background-color: rgba(0, 0, 0, 0.5);
@@ -105,5 +109,67 @@ body {
   img {
     height: 120px;
     width: 100px;
+  }
+}
+.right {
+  display: flex;
+  align-items: center;
+  background-color: whitesmoke;
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+  .form_wrap,
+  .top,
+  .foot {
+    padding: 0 2rem;
+  }
+  .form_wrap {
+    background-color: white;
+    box-shadow: 1px 1px 3px gray;
+    h2 {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .form {
+      p {
+        display: flex;
+        flex-direction: column;
+        min-width: 40%;
+        padding: 0.75rem 2rem 0.75rem 0;
+        label {
+          font-size: 0.7rem;
+        }
+      }
+      display: flex;
+      flex-wrap: wrap;
+      input {
+        border-radius: 5px;
+        border: 1px solid gray;
+      }
+      input:focus {
+        box-shadow: 2px 2px 4px gray;
+        border: 1px solid blue;
+      }
+      input[type="password"]:invalid {
+        border: 1px solid red;
+      }
+    }
+  }
+  .foot {
+    button {
+      background-color: #596d48;
+      border: none;
+      border-radius: 10px;
+      padding: 0.5rem 3rem;
+      margin: 2rem 0;
+      color: white;
+      font-weight: bold;
+    }
+    span {
+      color: #596d48;
+    }
   }
 }
