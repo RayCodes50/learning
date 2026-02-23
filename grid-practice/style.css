@@ -73,3 +73,35 @@ svg {
 #__next {
   isolation: isolate;
 }
+
+/* Main styling */
+.main_wrap {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 150px 1fr;
+  height: 100vh;
+}
+.dashboard {
+  * {
+    border: 1px solid red;
+  }
+  svg {
+    height: 40px;
+    width: 40px;
+    fill: white;
+    display: inline-block;
+  }
+  p {
+    display: inline-block;
+  }
+  background-color: blue;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+.logo > svg {
+  height: 60px;
+  width: 60px;
+}
+.top {
+  background-color: gray;
+}
