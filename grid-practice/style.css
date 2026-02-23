@@ -82,18 +82,29 @@ svg {
   height: 100vh;
 }
 .dashboard {
-  * {
-    border: 1px solid red;
+  .segment,
+  .logo {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    padding-left: 2rem;
   }
   svg {
     height: 40px;
     width: 40px;
     fill: white;
-    display: inline-block;
   }
-  p {
-    display: inline-block;
+  .logo {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
   }
+  .com {
+    padding-bottom: 6rem;
+  }
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
   background-color: blue;
   grid-column: 1;
   grid-row: 1 / span 2;
