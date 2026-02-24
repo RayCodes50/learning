@@ -200,4 +200,21 @@ svg {
       font-weight: bold;
     }
   }
+  .anno_hero {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+  .anno_top {
+    padding: 1rem;
+  }
+  .anno {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+}
+.anno > :nth-child(2) {
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
 }
