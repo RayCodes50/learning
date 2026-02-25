@@ -1,0 +1,75 @@
+@import "modern-normalize";
+
+/* Remove default margins & paddings */
+*:not(dialog) {
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic typography improvements */
+body {
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Optional: experimental size interpolation */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* Navigation resets */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Headings & paragraphs */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+  font-size: inherit;
+  font-weight: inherit;
+}
+p {
+  overflow-wrap: break-word;
+}
+
+/* Table basics */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+th,
+td {
+  padding: 0.25rem;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+/* Media elements */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Optional stacking context for app roots */
+#root,
+#__next {
+  isolation: isolate;
+}
