@@ -20,25 +20,16 @@ const board = (() => {
 })();
 
 // Player create factory
-const CreatePlayer = (function () {
-  function createPlayer(name, marker) {
-    return { name, marker };
-  }
-  return { createPlayer };
-})();
+createPlayer = function (name, marker) {
+  return { name, marker };
+};
 
 //create a new player1
-const player1 = CreatePlayer.createPlayer("Steve", "X");
+const player1 = createPlayer("Steve", "X");
 console.log(player1.marker);
 
 const GameController = (function () {
-  //handle picks turns
-  function pick() {
-    const index = Number(prompt("Choose from 0 to 8"));
-    return index;
-  }
-
-  return { pick };
+  return;
   //call board methods
   //validate moves
   //switch players
@@ -47,6 +38,12 @@ const GameController = (function () {
 
 // Display controller
 const DisplayController = function () {
+  //handle picks
+  function pick() {
+    const index = Number(prompt("Choose from 0 to 8"));
+    return index;
+  }
+  return { pick };
   //listen for clicks
   // gets uer input
   //call play round
@@ -55,7 +52,7 @@ const DisplayController = function () {
 
 // the part of game logic?
 // board.gameBoard[4] = player2.marker;
-const control = GameController.pick();
+const control = DisplayController.pick();
 console.log(control);
 // control();
 // crossing field logic
