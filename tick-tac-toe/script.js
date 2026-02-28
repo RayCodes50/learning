@@ -1,22 +1,23 @@
-// FActory wrapped in IIFE (immediately invoked function expression)
+// IIFE (immediately invoked function expression) for board state
 const board = (() => {
   //create and store board state
   const gameBoard = Array(9).fill(null);
 
+  //Place the player marker inside the board array
   function placeMarker(index, marker) {
-    // return { gameBoard };
+    gameBoard[index] = marker;
   }
 
-  // show the board for deveelopment
+  // show the board for development
   function showBoard() {
     return [...gameBoard];
   }
-  return { placeMarker, showBoard };
-  //place markers
   //board resetting
+  function resetBoard() {
+    gameBoard.fill(null);
+  }
+  return { placeMarker, showBoard, resetBoard };
 })();
-// const board = BoardFactory.board();
-console.log(board.showBoard());
 
 // Player create factory
 const CreatePlayer = (function () {
