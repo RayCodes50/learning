@@ -1,17 +1,22 @@
 // FActory wrapped in IIFE (immediately invoked function expression)
-const BoardFactory = (function () {
+const board = (() => {
   //create and store board state
-  function board() {
-    const gameBoard = Array(9).fill(null);
-    return { gameBoard };
+  const gameBoard = Array(9).fill(null);
+
+  function placeMarker(index, marker) {
+    // return { gameBoard };
   }
-  return { board };
+
+  // show the board for deveelopment
+  function showBoard() {
+    return [...gameBoard];
+  }
+  return { placeMarker, showBoard };
   //place markers
   //board resetting
 })();
-const board = BoardFactory.board();
-board.gameBoard[1] = "X";
-console.log(board.gameBoard);
+// const board = BoardFactory.board();
+console.log(board.showBoard());
 
 // Player create factory
 const CreatePlayer = (function () {
@@ -48,9 +53,7 @@ const DisplayController = function () {
 };
 
 // the part of game logic?
-board.gameBoard[2] = player1.marker;
 // board.gameBoard[4] = player2.marker;
-console.log(board.gameBoard);
 const control = GameController.pick();
 console.log(control);
 // control();
