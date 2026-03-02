@@ -27,25 +27,29 @@ createPlayer = function (name, marker) {
   return { name, marker };
 };
 
-//create a new player1
-const player1 = createPlayer("Steve", "X");
-
 const GameController = (() => {
+  const player1 = createPlayer("Steve", "X");
+  const player2 = createPlayer("Ewa", "O");
+  let currentPlayer = player1;
+
   //call board methods
   // I M P O R T A N T
   // index deosn't exist yet I M P O R T A N T
-  function playerPick(index, player) {
+  function playRound(index) {
     board.placeMarker(index, player.marker);
     const winner = GameController.winnerCheck();
     const full = board.isFull();
     if (full) {
       return `Game Draw`;
     }
-
-    return { index, marker: player.marker, winner, full }; // for debuging
+    GameController.switchPlayer();
+    return { index, marker: player.marker, winner, full, next: currentPlayer }; // for debuging
   }
-  //validate moves
   //switch players
+  function switchPlayer() {
+    currentPlayer = player2;
+  }
+
   // check winner
   function winnerCheck() {
     // Someone won outcome
@@ -73,7 +77,16 @@ const GameController = (() => {
     return `Game not finished`;
   }
   // board full or draw outcome to follow
-  return { winnerCheck, playerPick };
+  return {
+    winnerCheck,
+    playRound,
+    switchPlayer,
+    player1,
+    player2,
+    get currentPlayer() {
+      return currentPlayer;
+    },
+  };
 })();
 // Display controller
 const DisplayController = function () {
