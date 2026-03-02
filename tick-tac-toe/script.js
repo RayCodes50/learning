@@ -62,6 +62,7 @@ const GameController = (() => {
   }
   //switch players
   function switchPlayer() {
+    console.log(`switch initiated`);
     if (currentPlayer == player1) {
       currentPlayer = player2;
     } else {
@@ -84,8 +85,6 @@ const GameController = (() => {
       [2, 4, 6],
     ];
     for (const combo of winningCombinations) {
-      console.log(`Checking for loop`);
-
       const [a, b, c] = combo;
       if (
         boardStatus[a] &&
@@ -96,7 +95,6 @@ const GameController = (() => {
         return `The winner is ${currentPlayer}`;
       }
     }
-    return `Game not finished`;
   }
   return {
     winnerCheck,
@@ -110,15 +108,19 @@ const GameController = (() => {
   };
 })();
 // Display controller
-const DisplayController = function () {
-  //handle picks
-  function pick() {
-    const index = Number(prompt("Choose from 0 to 8"));
-    return index;
-  }
-  return { pick };
+const DisplayController = (() => {
   //listen for clicks
-  // gets uer input
-  //call play round
+  function startTheGame() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((el, index) => {
+      el.addEventListener("click", () => {
+        console.log(`you clicked ${el} of index ${index}`);
+        GameController.playRound(index);
+      });
+    });
+  }
+  return { startTheGame };
+
   //update the screen
-};
+})();
+DisplayController.startTheGame();

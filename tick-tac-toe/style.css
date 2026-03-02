@@ -74,3 +74,38 @@ svg {
 #__next {
   isolation: isolate;
 }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.wrap {
+  background-color: aqua;
+  padding: 1rem;
+  border: 5px solid black;
+  border-radius: 10px;
+  text-align: center;
+
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
+  .cell_wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    .cell {
+      background-color: antiquewhite;
+      height: 100px;
+      aspect-ratio: 1;
+      svg {
+        display: block;
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}
