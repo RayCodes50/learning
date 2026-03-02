@@ -31,9 +31,10 @@ const GameController = (() => {
   //call board methods
   // I M P O R T A N T
   // index deosn't exist yet I M P O R T A N T
-  function playerPick(index = 1, player) {
+  function playerPick(index, player) {
     board.placeMarker(index, player.marker);
-    return { index, marker: player.marker }; // for debuging
+    const winner = GameController.winnerCheck();
+    return { index, marker: player.marker, winner }; // for debuging
   }
   //validate moves
   //switch players
