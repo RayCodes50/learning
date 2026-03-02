@@ -26,16 +26,40 @@ createPlayer = function (name, marker) {
 
 //create a new player1
 const player1 = createPlayer("Steve", "X");
-console.log(player1.marker);
 
-const GameController = (function () {
-  return;
+const GameController = (() => {
   //call board methods
   //validate moves
   //switch players
   // check winner
+  function winnerCheck() {
+    // Someone won outcome
+    const boardStatus = board.showBoard();
+    const winningCombinations = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (const combo of winningCombinations) {
+      const [a, b, c] = combo;
+      if (
+        boardStatus[a] &&
+        boardStatus[a] === boardStatus[b] &&
+        boardStatus[a] === boardStatus[c]
+      ) {
+        return `The winner is ${a}`;
+      }
+    }
+    return `Game not finished`;
+  }
+  // board full or draw outcome to follow
+  return { winnerCheck };
 })();
-
 // Display controller
 const DisplayController = function () {
   //handle picks
@@ -49,15 +73,3 @@ const DisplayController = function () {
   //call play round
   //update the screen
 };
-
-// the part of game logic?
-// board.gameBoard[4] = player2.marker;
-const control = DisplayController.pick();
-console.log(control);
-// control();
-// crossing field logic
-// function crossField(position) {
-//   return (board.gameBoard[position] = marker);
-// }
-//player1.crossField(3);
-//
