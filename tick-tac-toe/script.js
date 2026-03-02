@@ -29,6 +29,12 @@ const player1 = createPlayer("Steve", "X");
 
 const GameController = (() => {
   //call board methods
+  // I M P O R T A N T
+  // index deosn't exist yet I M P O R T A N T
+  function playerPick(index = 1, player) {
+    board.placeMarker(index, player.marker);
+    return { index, marker: player.marker }; // for debuging
+  }
   //validate moves
   //switch players
   // check winner
@@ -58,7 +64,7 @@ const GameController = (() => {
     return `Game not finished`;
   }
   // board full or draw outcome to follow
-  return { winnerCheck };
+  return { winnerCheck, playerPick };
 })();
 // Display controller
 const DisplayController = function () {
