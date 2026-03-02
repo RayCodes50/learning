@@ -16,7 +16,10 @@ const board = (() => {
   function resetBoard() {
     gameBoard.fill(null);
   }
-  return { placeMarker, showBoard, resetBoard };
+  function isFull() {
+    return gameBoard.every((cell) => cell !== null);
+  }
+  return { placeMarker, showBoard, resetBoard, isFull };
 })();
 
 // Player create factory
@@ -34,7 +37,12 @@ const GameController = (() => {
   function playerPick(index, player) {
     board.placeMarker(index, player.marker);
     const winner = GameController.winnerCheck();
-    return { index, marker: player.marker, winner }; // for debuging
+    const full = board.isFull();
+    if (full) {
+      return `Game Draw`;
+    }
+
+    return { index, marker: player.marker, winner, full }; // for debuging
   }
   //validate moves
   //switch players
