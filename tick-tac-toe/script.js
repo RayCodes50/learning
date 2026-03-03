@@ -144,13 +144,21 @@ const DisplayController = (() => {
   //listen for clicks
   function startTheGame() {
     const cells = document.querySelectorAll(".cell");
+    const status = document.querySelector(".status");
     cells.forEach((el, index) => {
       el.addEventListener("click", () => {
-        console.log(`you clicked ${el} of index ${index}`);
         const result = GameController.playRound(index);
         placeSvg(result.oldMark, index, el);
-        changeName(result.oldMark);
-        console.log(result);
+        changeName(result.currentPlayer);
+        if (result.full) {
+          status.innerText = `It's a draw`;
+          status.classList.toggle("visibility");
+        }
+        if (result.winner) {
+          status.innerText = `Winner ${result.currentPlayer.name}`;
+          status.classList.toggle("visibility");
+          el.removeEventListener("click");
+        }
       });
     });
   }
@@ -169,7 +177,6 @@ const DisplayController = (() => {
         el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100"> <title>alpha-x</title> <path d="M9,7L11,12L9,17H11L12,14.5L13,17H15L13,12L15,7H13L12,9.5L11,7H9Z"/></svg>`;
         break;
       case "O":
-        console.log("case o innitiated");
         el.innerHTML = `<svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
