@@ -38,18 +38,20 @@ const GameController = (() => {
   let currentPlayer = player1;
   let full = false;
   let winner = false;
+  let oldMark = "";
 
   //call board methods
   function playRound(index) {
     const empty = validMove(index);
     if (!empty) {
-      const move = { move: false };
       return {
         winner,
         full,
+        oldMark,
         currentPlayer,
       };
     }
+    oldMark = currentPlayer.marker;
     board.placeMarker(index, currentPlayer.marker);
     winner = GameController.winnerCheck();
     if (winner) {
@@ -57,6 +59,7 @@ const GameController = (() => {
       return {
         winner,
         full,
+        oldMark,
         currentPlayer,
       };
     }
@@ -67,6 +70,7 @@ const GameController = (() => {
       return {
         winner,
         full,
+        oldMark,
         currentPlayer,
       };
     }
@@ -74,6 +78,7 @@ const GameController = (() => {
     return {
       winner,
       full,
+      oldMark,
       currentPlayer,
     };
   }
@@ -148,6 +153,7 @@ const DisplayController = (() => {
       });
     });
   }
+  // function changing name in html turn
   function changeName(player) {
     const htmlName = document.querySelector(".player");
 
@@ -155,6 +161,7 @@ const DisplayController = (() => {
   }
   return { startTheGame, changeName };
 
-  //update the screen
+  //update the screen with x and o
+  function placeSvg(index, marker) {}
 })();
 DisplayController.startTheGame();
