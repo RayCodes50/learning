@@ -145,21 +145,29 @@ const DisplayController = (() => {
   function startTheGame() {
     const cells = document.querySelectorAll(".cell");
     const status = document.querySelector(".status");
+    const handlers = [];
     cells.forEach((el, index) => {
-      el.addEventListener("click", () => {
+      function handleClick() {
         const result = GameController.playRound(index);
         placeSvg(result.oldMark, index, el);
         changeName(result.currentPlayer);
         if (result.full) {
           status.innerText = `It's a draw`;
           status.classList.toggle("visibility");
+          cells.forEach((cell, idx) =>
+            cell.removeEventListener("click", handlers[idx]),
+          );
         }
         if (result.winner) {
           status.innerText = `Winner ${result.currentPlayer.name}`;
           status.classList.toggle("visibility");
-          el.removeEventListener("click");
+          cells.forEach((cell, idx) =>
+            cell.removeEventListener("click", handlers[idx]),
+          );
         }
-      });
+      }
+      el.addEventListener("click", handleClick);
+      handlers[index] = handleClick;
     });
   }
   // function changing name in html turn

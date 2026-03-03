@@ -1,21 +1,19 @@
-function Book(title, author, pages, read) {
-  if (!new.target) {
-    throw Error("You must use the new operator to call the constructor");
-  }
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-};
-const theHobbit = new Book(
-  "The Hobbit",
-  "J.R.R. Tolkien",
-  "295",
-  "not read yet",
-);
+const cells = document.querySelectorAll(".cell");
 
-console.log(theHobbit.info());
-console.log(Object.getPrototypeOf(theHobbit));
+let clicks = 0;
+const handlers = [];
+cells.forEach((el, i) => {
+  function handleClick() {
+    clicks++;
+    console.log(`hello ${i} click:${clicks}`);
+    if (clicks == 10) {
+      console.log(`Finito`);
+      cells.forEach((el, idx) => {
+        el.removeEventListener("click", handlers[idx]);
+      });
+    }
+  }
+  el.addEventListener("click", handleClick);
+  handlers[i] = handleClick;
+  console.log(handlers[i]);
+});

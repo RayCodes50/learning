@@ -2,21 +2,143 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title></title>
-    <!-- <link rel="stylesheet" href="../base.css" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
   </head>
-
   <body>
-    <script>
-      function createGame(gameName) {
-        let score = 0;
-        return function win() {
-          score++;
-          return `Your name ${gameName} scre is ${score}`;
-        };
+    <style>
+      /* Remove default margins & paddings */
+      *:not(dialog) {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      const hockeyGame = createGame("Hockey");
-    </script>
+
+      /* Basic typography improvements */
+      body {
+        line-height: 1.25;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Optional: experimental size interpolation */
+      @media (prefers-reduced-motion: no-preference) {
+        html {
+          interpolate-size: allow-keywords;
+        }
+      }
+
+      /* Navigation resets */
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* Headings & paragraphs */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      p {
+        overflow-wrap: break-word;
+      }
+
+      /* Table basics */
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+      }
+      th,
+      td {
+        padding: 0.25rem;
+        text-align: left;
+        border: 1px solid #ccc;
+      }
+
+      /* Media elements */
+      img,
+      picture,
+      video,
+      canvas,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      /* Optional stacking context for app roots */
+      #root,
+      #__next {
+        isolation: isolate;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .wrap {
+        background-color: aqua;
+        padding: 1rem;
+        border: 5px solid black;
+        border-radius: 10px;
+        text-align: center;
+        .visibility {
+          visibility: hidden;
+        }
+
+        .title {
+          font-size: 2rem;
+          font-weight: bold;
+          padding-bottom: 1rem;
+        }
+        .player {
+          padding-bottom: 0.5rem;
+        }
+        .cell_wrap {
+          display: grid;
+          grid-template-columns: repeat(3, 100px);
+          gap: 10px;
+          .cell {
+            background-color: antiquewhite;
+            height: 100px;
+            aspect-ratio: 1;
+            svg {
+              display: block;
+              width: 100px;
+              height: 100px;
+            }
+          }
+        }
+      }
+    </style>
+    <div class="wrap">
+      <h1 class="title">Let's play</h1>
+      <p>Turn: <span class="player">Steve</span></p>
+      <p class="status visibility">Board</p>
+      <div class="cell_wrap">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
   </body>
 </html>
