@@ -93,6 +93,9 @@ body {
     font-weight: bold;
     padding-bottom: 1rem;
   }
+  .player {
+    padding-bottom: 0.5rem;
+  }
   .cell_wrap {
     display: grid;
     grid-template-columns: repeat(3, 100px);

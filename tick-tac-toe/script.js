@@ -36,33 +36,45 @@ const GameController = (() => {
   const player1 = createPlayer("Steve", "X");
   const player2 = createPlayer("Ewa", "O");
   let currentPlayer = player1;
+  let full = false;
+  let winner = false;
 
   //call board methods
   function playRound(index) {
     const empty = validMove(index);
-    console.log(empty);
     if (!empty) {
       const move = { move: false };
-      return { move };
+      return {
+        winner,
+        full,
+        currentPlayer,
+      };
     }
     board.placeMarker(index, currentPlayer.marker);
-    const winner = GameController.winnerCheck();
+    winner = GameController.winnerCheck();
     if (winner) {
       // if win happens  let UI know
-      return { currentPlayer };
+      return {
+        winner,
+        full,
+        currentPlayer,
+      };
     }
-    const full = board.isFull();
+    full = board.isFull();
     if (full) {
       // if DRAW happens let UI know
 
-      return { full };
+      return {
+        winner,
+        full,
+        currentPlayer,
+      };
     }
     GameController.switchPlayer();
     return {
-      marker: currentPlayer.marker,
       winner,
       full,
-      next: currentPlayer,
+      currentPlayer,
     };
   }
   //switch players
@@ -131,11 +143,17 @@ const DisplayController = (() => {
       el.addEventListener("click", () => {
         console.log(`you clicked ${el} of index ${index}`);
         const result = GameController.playRound(index);
+        changeName(result.currentPlayer);
         console.log(result);
       });
     });
   }
-  return { startTheGame };
+  function changeName(player) {
+    const htmlName = document.querySelector(".player");
+
+    htmlName.innerText = player.name;
+  }
+  return { startTheGame, changeName };
 
   //update the screen
 })();
