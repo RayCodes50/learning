@@ -33,7 +33,7 @@ const GameController = (() => {
   const player1 = createPlayer("Steve", "X");
   const player2 = createPlayer("Ewa", "O");
   let currentPlayer = player1;
-  let winner = false;
+  // let winner = false;
 
   //call board methods
   // I M P O R T A N T
@@ -43,22 +43,21 @@ const GameController = (() => {
     const winner = GameController.winnerCheck();
     if (winner) {
       // if win happens  let UI know
-      return `${currentPlayer.name}`;
+      return { currentPlayer };
     }
     const full = board.isFull();
     if (full) {
       // if DRAW happens let UI know
 
-      return `Game Draw`;
+      return { full };
     }
     GameController.switchPlayer();
     return {
-      index,
       marker: currentPlayer.marker,
       winner,
       full,
       next: currentPlayer,
-    }; // for debuging
+    };
   }
   //switch players
   function switchPlayer() {
@@ -86,15 +85,21 @@ const GameController = (() => {
     ];
     for (const combo of winningCombinations) {
       const [a, b, c] = combo;
+      console.log(combo, `combo`);
+      console.log(a, b, c);
+      console.log(boardStatus[a], boardStatus[b], boardStatus[c]);
       if (
         boardStatus[a] &&
         boardStatus[a] === boardStatus[b] &&
         boardStatus[a] === boardStatus[c]
       ) {
-        winner = true;
-        return `The winner is ${currentPlayer}`;
+        console.log(`Winner true`);
+        return true;
+      } else {
+        console.log(`Winner false`);
       }
     }
+    return false;
   }
   return {
     winnerCheck,
@@ -105,6 +110,9 @@ const GameController = (() => {
     get currentPlayer() {
       return currentPlayer;
     },
+    // get winner() {
+    //   return winner;
+    // },
   };
 })();
 // Display controller
@@ -115,7 +123,8 @@ const DisplayController = (() => {
     cells.forEach((el, index) => {
       el.addEventListener("click", () => {
         console.log(`you clicked ${el} of index ${index}`);
-        GameController.playRound(index);
+        const result = GameController.playRound(index);
+        console.log(result);
       });
     });
   }
