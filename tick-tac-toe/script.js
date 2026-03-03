@@ -148,7 +148,8 @@ const DisplayController = (() => {
       el.addEventListener("click", () => {
         console.log(`you clicked ${el} of index ${index}`);
         const result = GameController.playRound(index);
-        changeName(result.currentPlayer);
+        placeSvg(result.oldMark, index, el);
+        changeName(result.oldMark);
         console.log(result);
       });
     });
@@ -162,6 +163,26 @@ const DisplayController = (() => {
   return { startTheGame, changeName };
 
   //update the screen with x and o
-  function placeSvg(index, marker) {}
+  function placeSvg(marker, index, el) {
+    switch (marker) {
+      case "X":
+        el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100"> <title>alpha-x</title> <path d="M9,7L11,12L9,17H11L12,14.5L13,17H15L13,12L15,7H13L12,9.5L11,7H9Z"/></svg>`;
+        break;
+      case "O":
+        console.log("case o innitiated");
+        el.innerHTML = `<svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="100"
+            height="100"
+          >
+            <title>circle-outline</title>
+            <path
+              d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+            />
+          </svg>`;
+        break;
+    }
+  }
 })();
 DisplayController.startTheGame();
