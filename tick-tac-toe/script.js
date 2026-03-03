@@ -28,7 +28,7 @@ const board = (() => {
 })();
 
 // Player create factory
-createPlayer = function (name, marker) {
+const createPlayer = function (name, marker) {
   return { name, marker };
 };
 
@@ -55,7 +55,7 @@ const GameController = (() => {
     }
     oldMark = currentPlayer.marker;
     board.placeMarker(index, currentPlayer.marker);
-    winner = GameController.winnerCheck();
+    winner = winnerCheck();
     if (winner) {
       // if win happens  let UI know
       return {
@@ -117,17 +117,12 @@ const GameController = (() => {
         boardStatus[a] === boardStatus[c]
       ) {
         return true;
-      } else {
       }
     }
     return false;
   }
   function validMove(index) {
-    if (board.isEmpty(index)) {
-      return true;
-    } else {
-      return false;
-    }
+    return board.isEmpty(index);
   }
   return {
     winnerCheck,
