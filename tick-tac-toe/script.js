@@ -38,17 +38,19 @@ const GameController = (() => {
   let currentPlayer = player1;
   let full = false;
   let winner = false;
+  let valid;
   let oldMark = "";
 
   //call board methods
   function playRound(index) {
-    const empty = validMove(index);
-    if (!empty) {
+    valid = validMove(index);
+    if (!valid) {
       return {
         winner,
         full,
         oldMark,
         currentPlayer,
+        valid,
       };
     }
     oldMark = currentPlayer.marker;
@@ -61,6 +63,7 @@ const GameController = (() => {
         full,
         oldMark,
         currentPlayer,
+        valid,
       };
     }
     full = board.isFull();
@@ -72,6 +75,7 @@ const GameController = (() => {
         full,
         oldMark,
         currentPlayer,
+        valid,
       };
     }
     GameController.switchPlayer();
@@ -80,6 +84,7 @@ const GameController = (() => {
       full,
       oldMark,
       currentPlayer,
+      valid,
     };
   }
   //switch players
@@ -149,6 +154,8 @@ const DisplayController = (() => {
     cells.forEach((el, index) => {
       function handleClick() {
         const result = GameController.playRound(index);
+        console.log(result);
+        if (!result.valid) return console.log(`invalid move`);
         placeSvg(result.oldMark, index, el);
         changeName(result.currentPlayer);
         if (result.full) {
