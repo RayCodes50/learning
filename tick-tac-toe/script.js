@@ -21,7 +21,10 @@ const board = (() => {
   function isFull() {
     return gameBoard.every((cell) => cell !== null);
   }
-  return { placeMarker, showBoard, resetBoard, isFull };
+  function isEmpty(index) {
+    return gameBoard[index] === null;
+  }
+  return { placeMarker, showBoard, resetBoard, isFull, isEmpty };
 })();
 
 // Player create factory
@@ -33,12 +36,15 @@ const GameController = (() => {
   const player1 = createPlayer("Steve", "X");
   const player2 = createPlayer("Ewa", "O");
   let currentPlayer = player1;
-  // let winner = false;
 
   //call board methods
-  // I M P O R T A N T
-  // index deosn't exist yet I M P O R T A N T
   function playRound(index) {
+    const empty = validMove(index);
+    console.log(empty);
+    if (!empty) {
+      const move = { move: false };
+      return { move };
+    }
     board.placeMarker(index, currentPlayer.marker);
     const winner = GameController.winnerCheck();
     if (winner) {
@@ -61,7 +67,6 @@ const GameController = (() => {
   }
   //switch players
   function switchPlayer() {
-    console.log(`switch initiated`);
     if (currentPlayer == player1) {
       currentPlayer = player2;
     } else {
@@ -71,7 +76,6 @@ const GameController = (() => {
 
   // check winner
   function winnerCheck() {
-    console.log(`Winner check fired`);
     const boardStatus = board.showBoard();
     const winningCombinations = [
       [0, 1, 2],
@@ -85,21 +89,23 @@ const GameController = (() => {
     ];
     for (const combo of winningCombinations) {
       const [a, b, c] = combo;
-      console.log(combo, `combo`);
-      console.log(a, b, c);
-      console.log(boardStatus[a], boardStatus[b], boardStatus[c]);
       if (
         boardStatus[a] &&
         boardStatus[a] === boardStatus[b] &&
         boardStatus[a] === boardStatus[c]
       ) {
-        console.log(`Winner true`);
         return true;
       } else {
-        console.log(`Winner false`);
       }
     }
     return false;
+  }
+  function validMove(index) {
+    if (board.isEmpty(index)) {
+      return true;
+    } else {
+      return false;
+    }
   }
   return {
     winnerCheck,
@@ -110,6 +116,7 @@ const GameController = (() => {
     get currentPlayer() {
       return currentPlayer;
     },
+    validMove,
     // get winner() {
     //   return winner;
     // },
