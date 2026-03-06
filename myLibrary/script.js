@@ -20,33 +20,41 @@ form.addEventListener("submit", (e) => {
 
 //adds book to the arr by user
 formBtn.addEventListener("click", function () {
-  addBookToLibrary(
+  const library = new Library(
     formTitle.value,
     formAuthor.value,
     formPages.value,
     formRead.value,
   );
-  displayBooks();
+  library.add();
+  console.log(library);
 
-  console.log(myLibrary);
+  displayBooks(library);
 });
 
-// book constructor
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = crypto.randomUUID();
+class Library {
+  constructor(title, author, pages, read) {
+    this.book1 = new Book(title, author, pages, read);
+  }
+  add() {
+    return myLibrary.push(this.book1);
+  }
 }
-// adds book to the library (arr)
-function addBookToLibrary(title, author, pages, read) {
-  const book1 = new Book(title, author, pages, read);
-  myLibrary.push(book1);
+
+//Class constructor for book
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = crypto.randomUUID();
+  }
 }
 
 // display book algo
 function displayBooks(book) {
+  console.log(book);
   myLibrary.forEach((element) => {
     const div = document.createElement("div");
     div.classList.add("card");
