@@ -2,143 +2,101 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+    .test {
+      height: 100px;
+      width: 100px;
+    }
+  </style>
   <body>
-    <style>
-      /* Remove default margins & paddings */
-      *:not(dialog) {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      /* Basic typography improvements */
-      body {
-        line-height: 1.25;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      /* Optional: experimental size interpolation */
-      @media (prefers-reduced-motion: no-preference) {
-        html {
-          interpolate-size: allow-keywords;
-        }
-      }
-
-      /* Navigation resets */
-      nav ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      nav ul li a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      /* Headings & paragraphs */
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        overflow-wrap: break-word;
-        font-size: inherit;
-        font-weight: inherit;
-      }
-      p {
-        overflow-wrap: break-word;
-      }
-
-      /* Table basics */
-      table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 100%;
-      }
-      th,
-      td {
-        padding: 0.25rem;
-        text-align: left;
-        border: 1px solid #ccc;
-      }
-
-      /* Media elements */
-      img,
-      picture,
-      video,
-      canvas,
-      svg {
-        display: block;
-        max-width: 100%;
-      }
-
-      /* Optional stacking context for app roots */
-      #root,
-      #__next {
-        isolation: isolate;
-      }
-
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-      }
-      .wrap {
-        background-color: aqua;
-        padding: 1rem;
-        border: 5px solid black;
-        border-radius: 10px;
-        text-align: center;
-        .visibility {
-          visibility: hidden;
-        }
-
-        .title {
-          font-size: 2rem;
-          font-weight: bold;
-          padding-bottom: 1rem;
-        }
-        .player {
-          padding-bottom: 0.5rem;
-        }
-        .cell_wrap {
-          display: grid;
-          grid-template-columns: repeat(3, 100px);
-          gap: 10px;
-          .cell {
-            background-color: antiquewhite;
-            height: 100px;
-            aspect-ratio: 1;
-            svg {
-              display: block;
-              width: 100px;
-              height: 100px;
-            }
+    <input type="text" id="searchInput" />
+    <img class="img" src="#" />
+    <img src="#" id="secondImg" />
+    <button id="btn">Fetch img</button>
+    <img class="test" src="./clear-day.svg" alt="" srcset="" />
+    <img
+      src="https://cdn.meteocons.com/latest/svg/fill/clear-day.svg"
+      alt="Clear day"
+      width="64"
+      height="64"
+    />
+    <script>
+      const btn = document.getElementById("btn");
+      const img = document.querySelector(".img");
+      const secondImg = document.querySelector("#secondImg");
+      const searchInput = document.getElementById("searchInput");
+      async function getCats() {
+        try {
+          const response = await fetch(
+            "https://api.giphy.com/v1/gifs/translate?api_key=yFnGpRq1605Yjk6bc0p2reH83akV7maP&s=cats",
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
           }
+          const catData = await response.json();
+          img.src = catData.data.images.original.url;
+        } catch (error) {
+          console.log(error);
         }
       }
-    </style>
-    <div class="wrap">
-      <h1 class="title">Let's play</h1>
-      <p>Turn: <span class="player">Steve</span></p>
-      <p class="status visibility">Board</p>
-      <div class="cell_wrap">
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-        <div class="cell"></div>
-      </div>
-    </div>
-    <script src="./script.js"></script>
+      getCats();
+
+      btn.addEventListener("click", () => {
+        getCats2();
+      });
+      async function getCats2() {
+        try {
+          const response = await fetch(
+            "https://api.giphy.com/v1/gifs/translate?api_key=yFnGpRq1605Yjk6bc0p2reH83akV7maP&s=cats",
+          );
+          if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+          }
+          const catData2 = await response.json();
+          const url2 = catData2.data.images.original.url;
+          console.log(url2);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      searchInput.addEventListener("blur", () => {
+        getCats3();
+      });
+
+      async function getCats3() {
+        const searchParam = searchInput.value;
+        const url = `https://api.giphy.com/v1/gifs/translate?api_key=yFnGpRq1605Yjk6bc0p2reH83akV7maP&s=${searchParam}`;
+        console.log(url);
+
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+          }
+          const catData3 = await response.json();
+          secondImg.src = catData3.data.images.original.url;
+          console.log(secondImg.src);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      async function loadJson(url) {
+        try {
+          const urlBack = await fetch(url);
+          if (urlBack.status !== 200) {
+            throw new Error(`HTTP error: ${urlBack.status}`);
+          }
+          return urlBack.json();
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
+      }
+
+      // check svg
+    </script>
   </body>
 </html>
